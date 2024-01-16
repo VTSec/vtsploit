@@ -4,7 +4,7 @@ spec-version: v0.4.0
 
 ---
 
-# x-sploit: An example app follows sploit-spec
+# vt-sploit: An example app follows sploit-spec
 
 Just an example, do not import code under example folder  
 

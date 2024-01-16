@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	name = `x-sploit/checksec`
+	name = `vt-sploit/checksec`
 )
 
 func main() {

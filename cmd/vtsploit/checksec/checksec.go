@@ -2,6 +2,7 @@ package checksec
 
 import (
 	"github.com/ctrsploit/sploit-spec/pkg/app"
+	"github.com/urfave/cli/v2"
 	"vtsploit/vul"
 )
 
