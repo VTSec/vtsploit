@@ -1,4 +1,4 @@
-module xsploit
+module vtsploit
 
 go 1.21.4
 

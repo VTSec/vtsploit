@@ -8,7 +8,7 @@ Fork this repo
 ### 1.2 clone the repository you forked
 eg.
 ```
-git clone git@github.com:ssst0n3/xsploit.git
+git clone git@github.com:ssst0n3/vtsploit.git
 ```
 
 ### 1.3 commit and push your code

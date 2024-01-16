@@ -11,12 +11,12 @@ Just an example, do not import code under example folder
 ## Usage
 
 ```
-❯ ./xsploit_linux_amd64       
+❯ ./vtsploit_linux_amd64       
 NAME:
-   xsploit - An example sploit tool follows sploit-spec
+   vtsploit - An example sploit tool follows sploit-spec
 
 USAGE:
-   xsploit [global options] command [command options] [arguments...]
+   vtsploit [global options] command [command options] [arguments...]
 
 COMMANDS:
    auto         auto
@@ -38,12 +38,12 @@ GLOBAL OPTIONS:
 ### env: collect env information
 
 ```
-❯ ./bin/release/xsploit_linux_amd64 env     
+❯ ./bin/release/vtsploit_linux_amd64 env     
 NAME:
-   xsploit env - Collect information
+   vtsploit env - Collect information
 
 USAGE:
-   xsploit env command [command options] [arguments...]
+   vtsploit env command [command options] [arguments...]
 
 COMMANDS:
    auto       auto
@@ -54,7 +54,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
    
-❯ ./bin/release/xsploit_linux_amd64 env auto
+❯ ./bin/release/vtsploit_linux_amd64 env auto
 second:                 32      # second of current time
 minute:                 53      # second of current minute
 ```
@@ -64,12 +64,12 @@ minute:                 53      # second of current minute
 CVE-2099-9999 exists when 2 | second . 
 
 ```
-❯ ./bin/release/xsploit_linux_amd64 checksec       
+❯ ./bin/release/vtsploit_linux_amd64 checksec       
 NAME:
-   xsploit checksec - check security inside a container
+   vtsploit checksec - check security inside a container
 
 USAGE:
-   xsploit checksec command [command options] [arguments...]
+   vtsploit checksec command [command options] [arguments...]
 
 COMMANDS:
    auto                 auto
@@ -79,7 +79,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 
-❯ ./bin/release/xsploit_linux_amd64 checksec 2099
+❯ ./bin/release/vtsploit_linux_amd64 checksec 2099
 [N]  CVE-2099-9999      # Description of CVE-2099-9999
 ```
 
@@ -88,12 +88,12 @@ OPTIONS:
 CVE-2099-9999 is a vulnerability only can be exploited by root.
 
 ```
-❯ ./bin/release/xsploit_linux_amd64 exploit      
+❯ ./bin/release/vtsploit_linux_amd64 exploit      
 NAME:
-   xsploit exploit - run a exploit
+   vtsploit exploit - run a exploit
 
 USAGE:
-   xsploit exploit command [command options] [arguments...]
+   vtsploit exploit command [command options] [arguments...]
 
 COMMANDS:
    auto                 auto
@@ -103,22 +103,22 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 
-❯ ./bin/release/xsploit_linux_amd64 exploit 2099
+❯ ./bin/release/vtsploit_linux_amd64 exploit 2099
 ERRO[0000] CVE-2099-9999 is not exploitable             
 
-❯ sudo ./bin/release/xsploit_linux_amd64 exploit 2099
+❯ sudo ./bin/release/vtsploit_linux_amd64 exploit 2099
 CVE-2099-9999 has exploited
 ```
 
-### vul: list vulnerabilities supported by xsploit
+### vul: list vulnerabilities supported by vtsploit
 
 ```
-❯ ./bin/release/xsploit_linux_amd64 vul     
+❯ ./bin/release/vtsploit_linux_amd64 vul     
 NAME:
-   xsploit vul - list vulnerabilities
+   vtsploit vul - list vulnerabilities
 
 USAGE:
-   xsploit vul command [command options] [arguments...]
+   vtsploit vul command [command options] [arguments...]
 
 COMMANDS:
    CVE-2099-9999, 2099  Description of CVE-2099-9999
@@ -127,12 +127,12 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 
-❯ ./bin/release/xsploit_linux_amd64 vul 2099 
+❯ ./bin/release/vtsploit_linux_amd64 vul 2099 
 NAME:
-   xsploit vul CVE-2099-9999 - Description of CVE-2099-9999
+   vtsploit vul CVE-2099-9999 - Description of CVE-2099-9999
 
 USAGE:
-   xsploit vul CVE-2099-9999 command [command options] [arguments...]
+   vtsploit vul CVE-2099-9999 command [command options] [arguments...]
 
 COMMANDS:
    checksec, c  check vulnerability exists
@@ -146,6 +146,6 @@ OPTIONS:
 ### machine friendly output
 
 ```
-❯ ./bin/release/xsploit_linux_amd64 --json env auto
+❯ ./bin/release/vtsploit_linux_amd64 --json env auto
 {"minute":{"name":"minute","description":"second of current minute","result":"55"},"second":{"name":"second","description":"second of current time","result":"19"}}
 ```

@@ -1,6 +1,6 @@
 .PHONY: all shell local build
 
-APP_NAME := xsploit
+APP_NAME := vtsploit
 
 # mirror
 DEFAULT_CN_APT_MIRROR := "mirrors.tuna.tsinghua.edu.cn"

@@ -5,7 +5,7 @@ import (
 	"github.com/ctrsploit/sploit-spec/pkg/prerequisite"
 	"github.com/ctrsploit/sploit-spec/pkg/prerequisite/user"
 	"github.com/ctrsploit/sploit-spec/pkg/vul"
-	prerequisite2 "xsploit/pkg/prerequisite"
+	prerequisite2 "vtsploit/pkg/prerequisite"
 )
 
 type CVE_2099_9999 struct {

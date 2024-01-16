@@ -5,22 +5,22 @@ import (
 	"github.com/ctrsploit/sploit-spec/pkg/version"
 	"github.com/urfave/cli/v2"
 	"os"
-	"xsploit/cmd/xsploit/auto"
-	"xsploit/cmd/xsploit/checksec"
-	"xsploit/cmd/xsploit/env"
-	"xsploit/cmd/xsploit/exploit"
-	"xsploit/cmd/xsploit/vul"
+	"vtsploit/cmd/vtsploit/auto"
+	"vtsploit/cmd/vtsploit/checksec"
+	"vtsploit/cmd/vtsploit/env"
+	"vtsploit/cmd/vtsploit/exploit"
+	"vtsploit/cmd/vtsploit/vul"
 )
 
 const usage = `An example sploit tool follows sploit-spec`
 
 func init() {
-	version.ProductName = "xsploit"
+	version.ProductName = "vtsploit"
 }
 
 func main() {
 	sploit := &cli.App{
-		Name:  "xsploit",
+		Name:  "vtsploit",
 		Usage: usage,
 		Commands: []*cli.Command{
 			auto.Command,

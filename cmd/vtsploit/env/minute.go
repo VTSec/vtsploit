@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"github.com/ctrsploit/sploit-spec/pkg/log"
 	"github.com/ctrsploit/sploit-spec/pkg/printer"
-	"github.com/urfave/cli/v2"
-	"xsploit/env"
+	"vtsploit/env"
 )
 
 var Minute = &cli.Command{
