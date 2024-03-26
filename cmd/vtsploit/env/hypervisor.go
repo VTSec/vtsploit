@@ -8,13 +8,13 @@ import (
 	"vtsploit/env"
 )
 
-var Minute = &cli.Command{
-	Name:    "minute",
-	Aliases: []string{"m"},
-	Usage:   "show the minute info",
+var Hypervisor = &cli.Command{
+	Name:    "hypervisor",
+	Aliases: []string{"r"},
+	Usage:   "show hypervisor type",
 	Action: func(context *cli.Context) (err error) {
 		log.Logger.Debug("")
-		result := env.Minute()
+		result := env.Hypervisor()
 		fmt.Println(printer.Printer.Print(result))
 		return
 	},

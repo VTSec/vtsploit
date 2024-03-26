@@ -4,7 +4,8 @@ APP_NAME := vtsploit
 
 # mirror
 DEFAULT_CN_APT_MIRROR := "mirrors.tuna.tsinghua.edu.cn"
-DEFAULT_CN_GOPROXY := "https://goproxy.cn,https://goproxy.io,direct"
+# DEFAULT_CN_GOPROXY := "https://goproxy.cn,https://goproxy.io,direct"
+DEFAULT_CN_GOPROXY := "https://goproxy.io,direct"
 APT_MIRROR ?= $(if $(CN),$(DEFAULT_CN_APT_MIRROR),)
 GOPROXY ?= $(if $(CN),$(DEFAULT_CN_GOPROXY),)
 

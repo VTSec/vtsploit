@@ -8,13 +8,13 @@ import (
 	"vtsploit/env"
 )
 
-var Second = &cli.Command{
-	Name:    "second",
-	Aliases: []string{"s"},
-	Usage:   "show the second info",
+var Devices = &cli.Command{
+	Name:    "devices",
+	Aliases: []string{"d"},
+	Usage:   "show device list",
 	Action: func(context *cli.Context) (err error) {
 		log.Logger.Debug("")
-		result := env.Second()
+		result := env.Devices()
 		fmt.Println(printer.Printer.Print(result))
 		return
 	},

@@ -7,8 +7,10 @@ var Command = &cli.Command{
 	Aliases: []string{"e"},
 	Usage:   "Collect information",
 	Subcommands: []*cli.Command{
-		Auto,
-		Second,
-		Minute,
+		//Auto,
+		Version,
+		Hypervisor,
+		Devices,
+		//CPU,
 	},
 }
