@@ -8,8 +8,6 @@ import (
 	"vtsploit/cmd/vtsploit/auto"
 	"vtsploit/cmd/vtsploit/checksec"
 	"vtsploit/cmd/vtsploit/env"
-	"vtsploit/cmd/vtsploit/exploit"
-	"vtsploit/cmd/vtsploit/vul"
 )
 
 const usage = `An example sploit tool follows sploit-spec`
@@ -26,8 +24,6 @@ func main() {
 			auto.Command,
 			env.Command,
 			checksec.Command,
-			exploit.Command,
-			vul.Command,
 			version.Command,
 		},
 	}

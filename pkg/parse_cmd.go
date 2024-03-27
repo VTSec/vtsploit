@@ -7,18 +7,35 @@ import (
 	"github.com/ctrsploit/sploit-spec/pkg/env/vt"
 )
 
-func appendDev( info vt.Basic, Type vt.DeviceType, name string ) ( vt.Basic ) {
-	for _, it := range info.DevList {
-		if it.Type == Type && it.Name == name {
-			return info
-		}
-	}
-	info.DevList = append(info.DevList, vt.DeviceInfo { Type: Type, Name: name} )
-
-	return info
+// 字符包含
+func MatchKey( info * vt.Basic , data string ) {
+	data = strings.ToLower(data)
+    for _, it := range DeviceKeyList {
+        for k, v := range it.Pair {
+            if strings.Contains(data, strings.ToLower(k)) {
+                AppendDev(info, it.Type, v)
+            }
+        }
+    }
 }
 
-func ParseLspci( info vt.Basic ) error {
+// 正则匹配
+func MatchRgx( info * vt.Basic , data string  ) {
+	data = strings.ToLower(data)
+	re := regexp.MustCompile(`virtio_\w+`)
+	result := re.FindAllString(data, -1)
+	for _, r := range result {
+		for _, it := range DeviceKeyRgx {
+			for k, v := range it.Pair {
+				if k == r {
+					AppendDev(info, vt.Other, v)
+				}
+			}
+		}
+	}
+}
+
+func ParseLspci( info * vt.Basic ) error {
 	out, err := RunCmd("lspci", []string { "-n" })
 	if err != nil {
 		return err
@@ -27,7 +44,7 @@ func ParseLspci( info vt.Basic ) error {
 	devId := re.FindAllString(out, -1)
 
 	for _, id := range devId {
-		out, err = RunCmd("lspci", []string{"-vv", "-s", string(id)});
+		out, err = RunCmd("lspci", []string{"-vv", "-s", string(id)})
 		if err != nil {
 			continue
 		}
@@ -44,7 +61,7 @@ func ParseLspci( info vt.Basic ) error {
 		}
 
 		if strings.Contains(r, "tesla") {
-			appendDev(info, vt.Display, "vfio-gpu")
+			AppendDev(info, vt.Display, "vfio-gpu")
 		} else if strings.Contains(r, "xensource") {
 			info.HyperType = "xen"
 		} else {
@@ -53,16 +70,67 @@ func ParseLspci( info vt.Basic ) error {
 			if len(result) > 1 {
 				r2 := result[0]
 				if strings.Contains(r2, "devdrv_device_driver") {
-					appendDev(info, vt.Display, "vfio-ascend")
+					AppendDev(info, vt.Display, "vfio-ascend")
 				} else {
-					appendDev(info, vt.Other, "vfio-" + r2)
+					AppendDev(info, vt.Other, "vfio-" + r2)
 				}
 			} else {
-				appendDev(info, vt.Other, r)
+				AppendDev(info, vt.Other, r)
 				fmt.Printf("Unknown device: %s", r)
 			}
 		} 
 
 	}
+	return nil
+}
+
+func ParseLsmod( info * vt.Basic ) error {
+	out, err := RunCmd("lsmod", []string{})
+	if err != nil {
+		return err
+	}
+
+	MatchKey(info, out)
+	MatchRgx(info, out)
+
+	return nil
+}
+
+func ParseLshw( info * vt.Basic ) error {
+	out, err := RunCmd("lshw", []string{})
+	if err != nil {
+		return err
+	}
+
+	MatchKey(info, out)
+	MatchRgx(info, out)
+	return nil
+}
+
+func ParseDemsg( info * vt.Basic ) error {
+	out, err := RunCmd("dmesg", []string{})
+	if err != nil {
+		return err
+	}
+
+	s := regexp.MustCompile(`Hypervisor detected: (.+?)\n`).FindAllStringSubmatch(out, 1)
+	if len(s) > 0 {
+		info.HyperType = Trim(s[0][1])
+	}
+	
+	return nil
+}
+
+func ParseLscpu( info * vt.Basic ) error {
+	out, err := RunCmd("lscpu", []string{})
+	if err != nil {
+		return err
+	}
+
+	s := regexp.MustCompile(`Hypervisor vendor: (.+?)\n`).FindAllStringSubmatch(out, 1)
+	if len(s) > 0 {
+		info.HyperType = Trim(s[0][1])
+	}
+
 	return nil
 }

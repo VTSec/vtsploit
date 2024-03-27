@@ -3,7 +3,6 @@ package env
 import (
 	"fmt"
 	"sort"
-	"time"
 	"vtsploit/pkg"
 
 	"github.com/ctrsploit/sploit-spec/pkg/env/vt"
@@ -13,25 +12,32 @@ import (
 
 func Devices() (result printer.Interface) {
 
-	info := vt.Basic {}
+	var info vt.Basic
 
-	pkg.ParseLspci(info)
+	pkg.ParseLspci(&info)
+	pkg.ParseLsmod(&info)
+	pkg.ParseLshw(&info)
+	pkg.EnumPort(&info)
+	pkg.ParseFile(&info)
 
-	sort.Slice(info , func(i, j int ) bool  {
+	sort.Slice(info.DevList , func(i, j int ) bool  {
 		return info.DevList[i].Type < info.DevList[j].Type
 	})
 
-	list := ""
+	if pkg.ContainsDev(info, "vfio-nvme") {
+		pkg.RemoveDev(&info, vt.Disk, "nvme")
+	}
+
+	list := "\n"
 	for _ , it := range info.DevList {
-		list += fmt.Sprintf("Type: %d, Name: %s\n",rune(it.Type), it.Name )
+		list += fmt.Sprintf("\tType: %d, Name: %s\n",rune(it.Type), it.Name )
 	}
 
 	result = item.Short{
 		Name:        "devices",
-		Description: "show device list",
+		Description: "",
 		Result:      list,
 	}
-
 
 	return
 }

@@ -1,19 +1,30 @@
 package env
 
 import (
+	"vtsploit/pkg"
+
+	"github.com/ctrsploit/sploit-spec/pkg/env/vt"
 	"github.com/ctrsploit/sploit-spec/pkg/printer"
 	"github.com/ctrsploit/sploit-spec/pkg/result/item"
-	"vtsploit/pkg"
 )
 
 func Hypervisor() (result printer.Interface) {
 
-	hyper_type := "other"
+	var info vt.Basic
+	pkg.ParseFile(&info)
+	pkg.ParseDemsg(&info)
+	pkg.ParseLscpu(&info)
 
-	if pkg.FindFile("/dev","kvm") {
-		hyper_type = "kvm"
-	} else if pkg.FindFile("/dev","xen") {
-		hyper_type = "xen"
+	hyper_type := "Other"
+
+	if info.HyperType != ""  {
+		hyper_type = info.HyperType
+	} else {
+		if len(pkg.EnumFile("/dev/kvm")) > 0 {
+			hyper_type = "KVM"
+		} else if len(pkg.EnumFile("/dev/kvm")) > 0  {
+			hyper_type = "XEN"
+		}
 	}
 
 	result = item.Short{
